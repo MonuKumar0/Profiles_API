@@ -1,9 +1,10 @@
-from django.shortcuts import render
 
+from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from . import serializers
+
 class HelloApiView(APIView):
     
     serializer_class=serializers.HelloSerializer
@@ -24,7 +25,17 @@ class HelloApiView(APIView):
     def put(self,request,pk=None):
         return Response({'method':'put'})
     def patch(self,request,pk=None):
-        
         return Response({'method':'patch'})
     def delete(request,pk=None):
         return Response({'method':'delete'})
+
+
+class HelloViewSet(viewsets.ViewSet):
+    """test api ViewSet."""
+    def list(self,request):
+        """return a hello message"""
+        a_viewset=[
+               "Monu Kumar",
+                ]
+        return Response({'message':'Hello', 'a_viewset':a_viewset})
+    
